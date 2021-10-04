@@ -10,19 +10,14 @@ def GetDB():
 def CrateTables():
     tables = [
         """
-            CREATE TABLE IF NOT EXISTS games (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-                price REAL NOT NULL,
-                rate INTEGER NOT NULL
-            )
-        """,
-        """
-            CREATE TABLE IF NOT EXISTS games2 (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-                price REAL NOT NULL,
-                rate INTEGER NOT NULL
+            CREATE TABLE IF NOT EXISTS Kisi (
+                KisiID INTEGER PRIMARY KEY AUTOINCREMENT,
+                TcKimlikNo TEXT NOT NULL,
+                Ad TEXT NOT NULL,
+                Soyad TEXT NOT NULL,
+                DogumYeri TEXT NOT NULL,
+                DogumTarihi TEXT NOT NULL,
+                IkametgahAdresi TEXT NOT NULL
             )
         """
     ]
