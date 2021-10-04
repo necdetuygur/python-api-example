@@ -3,6 +3,17 @@ from flask import Flask, jsonify, request
 import database
 import functions as f
 
+database.CrateTable("""
+    CREATE TABLE IF NOT EXISTS Kisi (
+        KisiID INTEGER PRIMARY KEY AUTOINCREMENT,
+        TcKimlikNo TEXT NOT NULL,
+        Ad TEXT NOT NULL,
+        Soyad TEXT NOT NULL,
+        DogumYeri TEXT NOT NULL,
+        DogumTarihi TEXT NOT NULL,
+        IkametgahAdresi TEXT NOT NULL
+    )
+""")
 
 @app.route('/Kisi', methods=["GET"])
 def KisiGetAll():
