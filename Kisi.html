@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="jquery.min.js"></script>
+    <title>Kişi</title>
+    <style>
+      * {
+        font: 13px arial;
+      }
+      div {
+        margin: 5px;
+      }
+      fieldset {
+        display: inline-block;
+        vertical-align: top;
+      }
+    </style>
+    <script>
+      var endpoint = "http://localhost:8070/";
+
+      function KisiAdd() {
+        var form = $("#ekle").serializeArray();
+        var data = {};
+        for (var i in form) {
+          data[form[i].name] = form[i].value;
+        }
+        data = JSON.stringify(data);
+        $.ajax({
+          type: "POST",
+          url: endpoint + "Kisi",
+          data: data,
+          success: function (res) {
+            alert(res == true ? "Kayıt başarılı!" : "Kayıt hatası oluştu!");
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+      function KisiDelete(id) {
+        $.ajax({
+          type: "DELETE",
+          url: endpoint + "Kisi/" + id,
+          success: function (res) {
+            alert(res == true ? id + " silindi!" : "Silme hatası oluştu!");
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+      function KisiGetById(id) {
+        $("#edit").fadeIn(1e3);
+        $.ajax({
+          type: "GET",
+          url: endpoint + "Kisi/" + id,
+          success: function (res) {
+            $("#edit_KisiID").val(res.KisiID);
+            $("#edit_TcKimlikNo").val(res.TcKimlikNo);
+            $("#edit_Ad").val(res.Ad);
+            $("#edit_Soyad").val(res.Soyad);
+            $("#edit_DogumYeri").val(res.DogumYeri);
+            $("#edit_DogumTarihi").val(res.DogumTarihi);
+            $("#edit_IkametgahAdresi").val(res.IkametgahAdresi);
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+      function KisiSet() {
+        var form = $("#duzenle").serializeArray();
+        var data = {};
+        for (var i in form) {
+          data[form[i].name] = form[i].value;
+        }
+        data = JSON.stringify(data);
+        $.ajax({
+          type: "PUT",
+          url: endpoint + "Kisi",
+          data: data,
+          success: function (res) {
+            alert(res == true ? "Kayıt başarılı!" : "Kayıt hatası oluştu!");
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+      function KisiGetAll() {
+        $.ajax({
+          type: "GET",
+          url: endpoint + "Kisi",
+          success: function (res) {
+            for (var i in res) {
+              row = res[i];
+              $("#table").append(`
+                <tr>
+                    <td>${row.TcKimlikNo}</td>
+                    <td>${row.Ad}</td>
+                    <td>${row.Soyad}</td>
+                    <td>${row.DogumYeri}</td>
+                    <td>${row.DogumTarihi}</td>
+                    <td>${row.IkametgahAdresi}</td>
+
+                    <td>
+                        <button type="button" onclick="KisiGetById(${row.KisiID})">Düzenle</button>
+                        <button type="button" onclick="KisiDelete(${row.KisiID})">Sil</button>
+                    </td>
+                </tr>
+            `);
+            }
+          },
+          dataType: "json",
+          contentType: "application/json",
+        });
+      }
+
+      window.addEventListener("load", KisiGetAll);
+    </script>
+  </head>
+  <body>
+    <fieldset>
+      <legend>Kişi Listesi</legend>
+      <table id="table" border="1">
+        <tr>
+          <th>TcKimlikNo</th>
+          <th>Ad</th>
+          <th>Soyad</th>
+          <th>DogumYeri</th>
+          <th>DogumTarihi</th>
+          <th>IkametgahAdresi</th>
+
+          <th>İşlem</th>
+        </tr>
+      </table>
+    </fieldset>
+
+    <fieldset>
+      <legend>Kişi Ekle</legend>
+      <form id="ekle" onsubmit="return false;">
+        <div>TcKimlikNo:<br /><input type="text" name="TcKimlikNo" /></div>
+        <div>Ad:<br /><input type="text" name="Ad" /></div>
+        <div>Soyad:<br /><input type="text" name="Soyad" /></div>
+        <div>DogumYeri:<br /><input type="text" name="DogumYeri" /></div>
+        <div>DogumTarihi:<br /><input type="text" name="DogumTarihi" /></div>
+        <div>
+          IkametgahAdresi:<br /><input type="text" name="IkametgahAdresi" />
+        </div>
+        <div>
+          <input type="button" value="Kaydet" onclick="KisiAdd()" />
+        </div>
+      </form>
+    </fieldset>
+
+    <fieldset id="edit" style="display: none">
+      <legend>Kişi Düzenle</legend>
+      <form id="duzenle" onsubmit="return false;">
+        <input type="hidden" name="KisiID" id="edit_KisiID" />
+        <div>
+          TcKimlikNo:<br /><input
+            type="text"
+            name="TcKimlikNo"
+            id="edit_TcKimlikNo"
+          />
+        </div>
+        <div>Ad:<br /><input type="text" name="Ad" id="edit_Ad" /></div>
+        <div>
+          Soyad:<br /><input type="text" name="Soyad" id="edit_Soyad" />
+        </div>
+        <div>
+          DogumYeri:<br /><input
+            type="text"
+            name="DogumYeri"
+            id="edit_DogumYeri"
+          />
+        </div>
+        <div>
+          DogumTarihi:<br /><input
+            type="text"
+            name="DogumTarihi"
+            id="edit_DogumTarihi"
+          />
+        </div>
+        <div>
+          IkametgahAdresi:<br /><input
+            type="text"
+            name="IkametgahAdresi"
+            id="edit_IkametgahAdresi"
+          />
+        </div>
+        <div>
+          <input type="button" value="Kaydet" onclick="KisiSet()" />
+        </div>
+      </form>
+    </fieldset>
+  </body>
+</html>
