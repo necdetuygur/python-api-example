@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 
 app = Flask(__name__)
 
@@ -7,8 +7,12 @@ import _Kisi
 @app.route('/', methods=["GET"])
 def Base():
     return """
-        /Kisi
+        <div><a href="Kisi.html">Kisi</a></div>
     """
+
+@app.route('/<path:path>')
+def send_public(path):
+    return send_from_directory('public', path)
 
 @app.after_request
 def after_request(response):
@@ -16,7 +20,6 @@ def after_request(response):
     response.headers["Access-Control-Allow-Credentials"] = "true"
     response.headers["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS, PUT, DELETE"
     response.headers["Access-Control-Allow-Headers"] = "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization"
-    response.headers["Content-Type"] = "application/json"
     return response
 
 if __name__ == "__main__":
