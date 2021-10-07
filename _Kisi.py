@@ -49,8 +49,7 @@ def KisiAdd():
     db = database.GetDB()
     cursor = db.cursor()
     statement = "INSERT INTO Kisi(TcKimlikNo, Ad, Soyad, DogumYeri, DogumTarihi, IkametgahAdresi) VALUES (?, ?, ?, ?, ?, ?)"
-    cursor.execute(statement, [TcKimlikNo, Ad, Soyad,
-                   DogumYeri, DogumTarihi, IkametgahAdresi])
+    cursor.execute(statement, [TcKimlikNo, Ad, Soyad, DogumYeri, DogumTarihi, IkametgahAdresi])
     db.commit()
     return jsonify(True)
 
@@ -70,8 +69,7 @@ def KisiSet():
     db = database.GetDB()
     cursor = db.cursor()
     statement = "UPDATE Kisi SET TcKimlikNo = ?, Ad = ?, Soyad = ?, DogumYeri = ?, DogumTarihi = ?, IkametgahAdresi = ? WHERE KisiID = ?"
-    cursor.execute(statement, [TcKimlikNo, Ad, Soyad,
-                   DogumYeri, DogumTarihi, IkametgahAdresi, KisiID])
+    cursor.execute(statement, [TcKimlikNo, Ad, Soyad, DogumYeri, DogumTarihi, IkametgahAdresi, KisiID])
     db.commit()
     return jsonify(True)
 
