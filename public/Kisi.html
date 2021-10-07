@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="jquery.min.js"></script>
-    <title>Kişi</title>
+    <title>Kisi</title>
     <style>
       * {
         font: 13px arial;
@@ -124,7 +124,7 @@
   </head>
   <body>
     <fieldset>
-      <legend>Kişi Listesi</legend>
+      <legend>Kisi Listesi</legend>
       <table id="table" border="1">
         <tr>
           <th>TcKimlikNo</th>
@@ -140,16 +140,14 @@
     </fieldset>
 
     <fieldset>
-      <legend>Kişi Ekle</legend>
+      <legend>Kisi Ekle</legend>
       <form id="ekle" onsubmit="return false;">
         <div>TcKimlikNo:<br /><input type="text" name="TcKimlikNo" /></div>
         <div>Ad:<br /><input type="text" name="Ad" /></div>
         <div>Soyad:<br /><input type="text" name="Soyad" /></div>
         <div>DogumYeri:<br /><input type="text" name="DogumYeri" /></div>
         <div>DogumTarihi:<br /><input type="text" name="DogumTarihi" /></div>
-        <div>
-          IkametgahAdresi:<br /><input type="text" name="IkametgahAdresi" />
-        </div>
+        <div>IkametgahAdresi:<br /><input type="text" name="IkametgahAdresi" /></div>
         <div>
           <input type="button" value="Kaydet" onclick="KisiAdd()" />
         </div>
@@ -157,41 +155,15 @@
     </fieldset>
 
     <fieldset id="edit" style="display: none">
-      <legend>Kişi Düzenle</legend>
+      <legend>Kisi Düzenle</legend>
       <form id="duzenle" onsubmit="return false;">
         <input type="hidden" name="KisiID" id="edit_KisiID" />
-        <div>
-          TcKimlikNo:<br /><input
-            type="text"
-            name="TcKimlikNo"
-            id="edit_TcKimlikNo"
-          />
-        </div>
+        <div>TcKimlikNo:<br /><input type="text" name="TcKimlikNo" id="edit_TcKimlikNo" /></div>
         <div>Ad:<br /><input type="text" name="Ad" id="edit_Ad" /></div>
-        <div>
-          Soyad:<br /><input type="text" name="Soyad" id="edit_Soyad" />
-        </div>
-        <div>
-          DogumYeri:<br /><input
-            type="text"
-            name="DogumYeri"
-            id="edit_DogumYeri"
-          />
-        </div>
-        <div>
-          DogumTarihi:<br /><input
-            type="text"
-            name="DogumTarihi"
-            id="edit_DogumTarihi"
-          />
-        </div>
-        <div>
-          IkametgahAdresi:<br /><input
-            type="text"
-            name="IkametgahAdresi"
-            id="edit_IkametgahAdresi"
-          />
-        </div>
+        <div>Soyad:<br /><input type="text" name="Soyad" id="edit_Soyad" /></div>
+        <div>DogumYeri:<br /><input type="text" name="DogumYeri" id="edit_DogumYeri" /></div>
+        <div>DogumTarihi:<br /><input type="text" name="DogumTarihi" id="edit_DogumTarihi" /></div>
+        <div>IkametgahAdresi:<br /><input type="text" name="IkametgahAdresi" id="edit_IkametgahAdresi" /></div>
         <div>
           <input type="button" value="Kaydet" onclick="KisiSet()" />
         </div>
